@@ -2,17 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Analog Clock</title>
+<title>50 / 10 Study Timer</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="clock">
-    <div class="hand hour" id="hour"></div>
-    <div class="hand minute" id="minute"></div>
-    <div class="hand second" id="second"></div>
-    <div class="center-dot"></div>
+<div class="timer-box">
+  <h1 id="mode">Study Time</h1>
+  <div id="time">50:00</div>
+
+  <div class="buttons">
+    <button onclick="startTimer()">Start</button>
+    <button onclick="resetTimer()">Reset</button>
+  </div>
 </div>
 
 <script src="script.js"></script>
