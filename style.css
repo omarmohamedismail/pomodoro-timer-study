@@ -1,22 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #020617, #020617);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, #020617, #020617);
   font-family: system-ui, sans-serif;
-  color: white;
+  color: #fff;
 }
 
 .app {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.06);
   backdrop-filter: blur(20px);
   padding: 40px;
-  border-radius: 24px;
   width: 340px;
+  border-radius: 24px;
   text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
 }
 
 #emoji {
@@ -27,13 +31,13 @@ body {
 #mode {
   margin: 10px 0;
   font-weight: 500;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 #time {
   font-size: 64px;
   margin: 20px 0;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .controls button {
@@ -43,8 +47,12 @@ body {
   border: none;
   font-size: 16px;
   cursor: pointer;
-  background: white;
-  color: black;
+  background: #fff;
+  color: #000;
+}
+
+.controls button:hover {
+  opacity: 0.85;
 }
 
 .settings {
@@ -60,10 +68,11 @@ body {
   font-size: 14px;
 }
 
-input, select {
+input,
+select {
   background: #020617;
-  color: white;
+  color: #fff;
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 8px;
-  padding: 5px;
+  padding: 6px;
 }
