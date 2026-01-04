@@ -2,20 +2,52 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>50 / 10 Study Timer</title>
+<title>Study Timer 50 / 10</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="timer-box">
-  <h1 id="mode">Study Time</h1>
+<div class="app">
+  <h1 id="emoji">📘</h1>
+  <h2 id="mode">Study Time</h2>
   <div id="time">50:00</div>
 
-  <div class="buttons">
-    <button onclick="startTimer()">Start</button>
-    <button onclick="resetTimer()">Reset</button>
+  <div class="controls">
+    <button onclick="startTimer()">▶ Start</button>
+    <button onclick="pauseTimer()">⏸ Pause</button>
+    <button onclick="resetTimer()">🔄 Reset</button>
+  </div>
+
+  <div class="settings">
+    <label>
+      🎨 Color
+      <input type="color" id="colorPicker">
+    </label>
+
+    <label>
+      😀 Emoji
+      <select id="emojiPicker">
+        <option>📘</option>
+        <option>📚</option>
+        <option>🧠</option>
+        <option>🔥</option>
+        <option>✨</option>
+        <option>☕</option>
+      </select>
+    </label>
+
+    <label>
+      🔊 Sound
+      <select id="soundPicker">
+        <option value="bell">Bell</option>
+        <option value="chime">Chime</option>
+      </select>
+    </label>
   </div>
 </div>
+
+<audio id="bell" src="https://assets.mixkit.co/sfx/preview/mixkit-bell-notification-933.mp3"></audio>
+<audio id="chime" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"></audio>
 
 <script src="script.js"></script>
 </body>
