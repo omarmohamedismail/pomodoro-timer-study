@@ -1,63 +1,73 @@
-let studyTime = 50 * 60;
-let breakTime = 10 * 60;
-let timeLeft = studyTime;
+"use strict";
+
+const STUDY_TIME = 50 * 60;
+const BREAK_TIME = 10 * 60;
+
+let timeLeft = STUDY_TIME;
 let isStudy = true;
-let timer = null;
+let timerId = null;
 
 const timeEl = document.getElementById("time");
 const modeEl = document.getElementById("mode");
 const emojiEl = document.getElementById("emoji");
+
 const colorPicker = document.getElementById("colorPicker");
 const emojiPicker = document.getElementById("emojiPicker");
 const soundPicker = document.getElementById("soundPicker");
 
+const startBtn = document.getElementById("startBtn");
+const pauseBtn = document.getElementById("pauseBtn");
+const resetBtn = document.getElementById("resetBtn");
+
 function updateDisplay() {
-  const m = Math.floor(timeLeft / 60);
-  const s = timeLeft % 60;
-  timeEl.textContent = `${m}:${s < 10 ? "0" : ""}${s}`;
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  timeEl.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
 function playSound() {
-  document.getElementById(soundPicker.value).play();
+  const audio = document.getElementById(soundPicker.value);
+  audio.currentTime = 0;
+  audio.play().catch(() => {});
+}
+
+function switchMode() {
+  isStudy = !isStudy;
+  timeLeft = isStudy ? STUDY_TIME : BREAK_TIME;
+  modeEl.textContent = isStudy ? "Study Time" : "Break Time";
 }
 
 function startTimer() {
-  if (timer) return;
-  timer = setInterval(() => {
+  if (timerId !== null) return;
+
+  timerId = setInterval(() => {
     timeLeft--;
     updateDisplay();
 
     if (timeLeft <= 0) {
-      clearInterval(timer);
-      timer = null;
       playSound();
-
-      isStudy = !isStudy;
-      if (isStudy) {
-        modeEl.textContent = "Study Time";
-        timeLeft = studyTime;
-      } else {
-        modeEl.textContent = "Break Time";
-        timeLeft = breakTime;
-      }
+      switchMode();
       updateDisplay();
-      startTimer();
     }
   }, 1000);
 }
 
 function pauseTimer() {
-  clearInterval(timer);
-  timer = null;
+  clearInterval(timerId);
+  timerId = null;
 }
 
 function resetTimer() {
   pauseTimer();
   isStudy = true;
-  timeLeft = studyTime;
+  timeLeft = STUDY_TIME;
   modeEl.textContent = "Study Time";
   updateDisplay();
 }
+
+startBtn.addEventListener("click", startTimer);
+pauseBtn.addEventListener("click", pauseTimer);
+resetBtn.addEventListener("click", resetTimer);
 
 colorPicker.addEventListener("input", e => {
   document.body.style.background =
