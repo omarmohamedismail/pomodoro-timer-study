@@ -1,54 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Study Timer 50 / 10</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Timer 50 / 10</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app">
-  <h1 id="emoji">📘</h1>
-  <h2 id="mode">Study Time</h2>
-  <div id="time">50:00</div>
+  <main class="app">
+    <h1 id="emoji" aria-label="Status Emoji">📘</h1>
+    <h2 id="mode">Study Time</h2>
+    <div id="time" aria-live="polite">50:00</div>
 
-  <div class="controls">
-    <button onclick="startTimer()">▶ Start</button>
-    <button onclick="pauseTimer()">⏸ Pause</button>
-    <button onclick="resetTimer()">🔄 Reset</button>
-  </div>
+    <div class="controls">
+      <button type="button" id="startBtn">▶ Start</button>
+      <button type="button" id="pauseBtn">⏸ Pause</button>
+      <button type="button" id="resetBtn">🔄 Reset</button>
+    </div>
 
-  <div class="settings">
-    <label>
-      🎨 Color
-      <input type="color" id="colorPicker">
-    </label>
+    <section class="settings">
+      <label>
+        🎨 Theme Color
+        <input type="color" id="colorPicker">
+      </label>
 
-    <label>
-      😀 Emoji
-      <select id="emojiPicker">
-        <option>📘</option>
-        <option>📚</option>
-        <option>🧠</option>
-        <option>🔥</option>
-        <option>✨</option>
-        <option>☕</option>
-      </select>
-    </label>
+      <label>
+        😀 Emoji
+        <select id="emojiPicker">
+          <option value="📘">📘</option>
+          <option value="📚">📚</option>
+          <option value="🧠">🧠</option>
+          <option value="🔥">🔥</option>
+          <option value="✨">✨</option>
+          <option value="☕">☕</option>
+        </select>
+      </label>
 
-    <label>
-      🔊 Sound
-      <select id="soundPicker">
-        <option value="bell">Bell</option>
-        <option value="chime">Chime</option>
-      </select>
-    </label>
-  </div>
-</div>
+      <label>
+        🔊 Sound
+        <select id="soundPicker">
+          <option value="bell">Bell</option>
+          <option value="chime">Chime</option>
+        </select>
+      </label>
+    </section>
+  </main>
 
-<audio id="bell" src="https://assets.mixkit.co/sfx/preview/mixkit-bell-notification-933.mp3"></audio>
-<audio id="chime" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"></audio>
+  <!-- External audio is REQUIRED for GitHub Pages -->
+  <audio id="bell" preload="auto"
+    src="https://assets.mixkit.co/sfx/preview/mixkit-bell-notification-933.mp3">
+  </audio>
 
-<script src="script.js"></script>
+  <audio id="chime" preload="auto"
+    src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3">
+  </audio>
+
+  <script src="script.js"></script>
 </body>
 </html>
