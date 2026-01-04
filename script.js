@@ -1,21 +1,52 @@
-const hourHand   = document.getElementById("hour");
-const minuteHand = document.getElementById("minute");
-const secondHand = document.getElementById("second");
+let studyTime = 50 * 60; // 50 minutes
+let breakTime = 10 * 60; // 10 minutes
+let timeLeft = studyTime;
+let isStudy = true;
+let timer = null;
 
-function updateClock() {
-    const now = new Date();
-    const seconds = now.getSeconds();
-    const minutes = now.getMinutes();
-    const hours   = now.getHours() % 12;
+const timeEl = document.getElementById("time");
+const modeEl = document.getElementById("mode");
 
-    const secondDeg = (seconds / 60) * 360 + 90;
-    const minuteDeg = (minutes / 60) * 360 + (seconds/60)*6 + 90;
-    const hourDeg   = (hours   / 12) * 360 + (minutes/60)*30 + 90;
-
-    secondHand.style.transform = `rotate(${secondDeg}deg)`;
-    minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
-    hourHand.style.transform   = `rotate(${hourDeg}deg)`;
+function updateDisplay() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  timeEl.textContent =
+    `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 }
 
-setInterval(updateClock, 1000);
-updateClock(); // initialize right away
+function startTimer() {
+  if (timer) return;
+
+  timer = setInterval(() => {
+    timeLeft--;
+    updateDisplay();
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      timer = null;
+
+      isStudy = !isStudy;
+      if (isStudy) {
+        modeEl.textContent = "Study Time";
+        timeLeft = studyTime;
+      } else {
+        modeEl.textContent = "Break Time";
+        timeLeft = breakTime;
+      }
+
+      updateDisplay();
+      startTimer();
+    }
+  }, 1000);
+}
+
+function resetTimer() {
+  clearInterval(timer);
+  timer = null;
+  isStudy = true;
+  timeLeft = studyTime;
+  modeEl.textContent = "Study Time";
+  updateDisplay();
+}
+
+updateDisplay();
